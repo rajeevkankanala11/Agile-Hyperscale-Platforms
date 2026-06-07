@@ -1,0 +1,12 @@
+# Cloud Provider SDKs
+boto3==1.34.35
+azure-identity==1.15.0
+azure-mgmt-containerinstance==10.1.0
+google-cloud-run==0.10.1
+google-auth==2.27.0
+
+# Data Processing
+pandas==2.2.0
+
+# Utility
+requests==2.31.0
