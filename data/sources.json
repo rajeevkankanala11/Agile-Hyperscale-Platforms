@@ -1,0 +1,28 @@
+{
+  "_README": "Maps each synthesised data group in published_benchmarks.json to its public source(s). This study transcribes and aggregates these published figures; it does not measure them.",
+  "references": {
+    "herbst_2013": "Herbst, N. R., Kounev, S., & Reussner, R. (2013). Elasticity in Cloud Computing: What It Is, and What It Is Not. Proc. 10th Int'l Conf. on Autonomic Computing (ICAC '13), USENIX, 23-27.",
+    "lehrig_2015": "Lehrig, S., Eikerling, H., & Becker, S. (2015). Scalability, Elasticity, and Efficiency in Cloud Computing: A Systematic Literature Review of Definitions and Metrics. QoSA '15, ACM, 83-92.",
+    "stonebraker_1986": "Stonebraker, M. (1986). The Case for Shared Nothing. IEEE Database Engineering Bulletin, 9(1), 4-9.",
+    "duan_2025_pipeco": "Duan, J., Qian, S., Hu, H., Yang, D., Cao, J., & Xue, G. (2025). PipeCo: Pipelining Cold Start of Deep Learning Inference Services on Serverless Platforms. Proc. ACM on Measurement and Analysis of Computing Systems, 9(2), 1-23.",
+    "ycsb_workload_a": "Cooper, B. F., Silberstein, A., Tam, E., Ramakrishnan, R., & Sears, R. (2010). Benchmarking cloud serving systems with YCSB. ACM SoCC. (Workload A profile basis for Table 1.)",
+    "cockroach_cloud_report": "Cockroach Labs. Cloud Report (latest editions within study window). Used for cross-provider latency/throughput context.",
+    "spec_cloud": "Standard Performance Evaluation Corporation. SPEC Cloud IaaS benchmark results (study window).",
+    "principled_technologies_cosmos": "Principled Technologies / Microsoft. Azure Cosmos DB vs DynamoDB NoSQL performance (vendor-commissioned; ~1M ops/s condition). Used ONLY for the explicitly condition-flagged 3.15 ms figure.",
+    "provider_pue_disclosures_2024": "Provider 2024 sustainability disclosures (Google Cloud data-centre efficiency reporting; AWS sustainability reporting; Microsoft Azure sustainability reporting).",
+    "wimadev_serverless_pricing_2025": "Wimadev. Comparing Prices: AWS Fargate vs Azure Container Apps vs Google Cloud Run (US-East, x86 Linux, monthly standard compute), 2025. Basis for list price per vCPU/GB.",
+    "sliplane_serverless_pricing_2025": "Sliplane. Comparing Prices: AWS Fargate vs Azure Container Apps vs Google Cloud Run, 2025. Billing-model and egress comparison.",
+    "cloudexmachina_fargate_pricing_2025": "Cloud ex Machina. AWS Fargate Pricing Explained (per-second vCPU/memory billing, 1-minute minimum), 2025.",
+    "byteiota_arm_x86_2025": "byteiota. ARM vs x86 Cloud: 2025 Performance & Cost Benchmark. Graviton4 ~42% better price-performance (9% faster at 33% lower cost) vs comparable x86.",
+    "hykell_graviton_pricing_2026": "Hykell. AWS ARM vs x86 pricing: Is Graviton really cheaper for your workload? ARM ~20% lower hourly, up to ~40% better price-performance.",
+    "aws_graviton_official": "Amazon Web Services. AWS Graviton (EC2) official page: Graviton-based instances up to 20% lower cost and up to 60% less energy than comparable x86."
+  },
+  "data_group_sources": {
+    "database_latency":  ["ycsb_workload_a", "cockroach_cloud_report"],
+    "database_latency.vendor_tuned_note": ["principled_technologies_cosmos"],
+    "network_latency":   ["cockroach_cloud_report", "spec_cloud"],
+    "provisioning":      ["spec_cloud", "herbst_2013", "lehrig_2015"],
+    "cost_efficiency":   ["wimadev_serverless_pricing_2025", "sliplane_serverless_pricing_2025", "cloudexmachina_fargate_pricing_2025", "byteiota_arm_x86_2025", "hykell_graviton_pricing_2026", "aws_graviton_official"],
+    "pue":               ["provider_pue_disclosures_2024"]
+  }
+}

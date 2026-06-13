@@ -1,0 +1,4 @@
+Platform,Consistency,p50 Read (ms),p99 Read (ms),p99 Write (ms),Throughput Stability
+AWS DynamoDB,Eventual,3.2,12.5,18.2,High
+Azure Cosmos DB,Session (Tunable),4.1,14.8,16.5,Medium
+GCP Firestore,Strong,6.8,28.4,35.1,Low

@@ -1,0 +1,4 @@
+Platform,Architecture,Time to Ready (s),Ev (inst/s),Burst Failure Rate (%)
+AWS Fargate,Serverless CaaS,95,1.05,0.5
+Azure Container Apps,Managed K8s,110,0.91,1.2
+GCP Cloud Run,Knative,25,4.0,0.0

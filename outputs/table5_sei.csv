@@ -1,0 +1,4 @@
+Platform,Ev_norm,rho,C_norm,SEI,SEI*
+AWS Fargate,0.263,0.995,1.0,0.261,0.4
+Azure Container Apps,0.228,0.988,2.17,0.104,0.16
+GCP Cloud Run,1.0,1.0,1.54,0.649,1.0

@@ -1,0 +1,71 @@
+{
+  "_README": "This file holds the PUBLISHED benchmark values synthesised in the manuscript. This is a literature-synthesis study: every number below is transcribed from a cited public source, NOT measured by this code. The scripts in src/ aggregate, normalise, and compute derived indices (Ev, SEI) from these inputs and regenerate the manuscript tables and figure. No live cloud provisioning or measurement is performed.",
+  "study_window": "24 months preceding submission (2023-2025)",
+
+  "database_latency": {
+    "_source": "Synthesised from YCSB Workload A profiles reported across the cited cloud-benchmark literature; see sources.json.",
+    "_basis": "YCSB Workload A. The Cosmos DB vendor-tuned figure (~3.15 ms p99 read at ~1M ops/s) is condition-specific and tracked separately in vendor_tuned_note.",
+    "platforms": [
+      {"platform": "AWS DynamoDB",   "consistency": "Eventual",          "p50_read_ms": 3.2, "p99_read_ms": 12.5, "p99_write_ms": 18.2, "throughput_stability": "High",   "cv_band": 0.08},
+      {"platform": "Azure Cosmos DB", "consistency": "Session (Tunable)", "p50_read_ms": 4.1, "p99_read_ms": 14.8, "p99_write_ms": 16.5, "throughput_stability": "Medium", "cv_band": 0.15},
+      {"platform": "GCP Firestore",   "consistency": "Strong",            "p50_read_ms": 6.8, "p99_read_ms": 28.4, "p99_write_ms": 35.1, "throughput_stability": "Low",    "cv_band": 0.28}
+    ],
+    "vendor_tuned_note": {
+      "platform": "Azure Cosmos DB",
+      "p99_read_ms": 3.15,
+      "condition": "~1,000,000 ops/sec, vendor-commissioned benchmark",
+      "source_ref": "principled_technologies_cosmos"
+    }
+  },
+
+  "network_latency": {
+    "_source": "Synthesised from cited trans-Atlantic RTT / jitter measurements in the cloud-comparison literature.",
+    "platforms": [
+      {"platform": "AWS",   "tier": "Standard Public",   "rtt_useast_euwest_ms": 74, "packet_loss_pct": 0.04,  "jitter_ms": 1.2},
+      {"platform": "Azure", "tier": "Microsoft Global",  "rtt_useast_euwest_ms": 72, "packet_loss_pct": 0.02,  "jitter_ms": 0.9},
+      {"platform": "GCP",   "tier": "Premium (Fiber)",   "rtt_useast_euwest_ms": 68, "packet_loss_pct": 0.009, "jitter_ms": 0.4}
+    ]
+  },
+
+  "provisioning": {
+    "_source": "Synthesised from published cold-start / provisioning-time ranges for serverless container platforms.",
+    "_delta_capacity_instances": 100,
+    "_note": "Ev is COMPUTED by src/compute_metrics.py as delta_capacity / time_to_ready_s; values are not hardcoded.",
+    "platforms": [
+      {"platform": "AWS Fargate",         "architecture": "Serverless CaaS", "time_to_ready_s": 95,  "burst_failure_rate_pct": 0.5},
+      {"platform": "Azure Container Apps","architecture": "Managed K8s",     "time_to_ready_s": 110, "burst_failure_rate_pct": 1.2},
+      {"platform": "GCP Cloud Run",       "architecture": "Knative",         "time_to_ready_s": 25,  "burst_failure_rate_pct": 0.0}
+    ]
+  },
+
+  "cost_efficiency": {
+    "_source": "Effective cost per unit of sustained, workload-relevant compute performance, derived from published US-East list price, billing model, and ARM price-performance. See cost_efficiency_derivation and sources.json.",
+    "_note": "kappa is a normalised price-per-performance index (cheapest provider = 1.00), NOT raw list price. SEI is a price-PERFORMANCE measure, so kappa reflects effective cost for the bursty Agile workloads the study targets, not headline list rates.",
+    "_status": "SOURCED",
+    "cost_efficiency_derivation": {
+      "list_price_per_cpu_useast_x86_monthly_usd": {"AWS Fargate": 29.55, "GCP Cloud Run": 51.25, "Azure Container Apps": 63.08},
+      "list_price_source_ref": "wimadev_serverless_pricing_2025",
+      "billing_model_efficiency_multiplier": {"AWS Fargate": 1.00, "GCP Cloud Run": 0.55, "Azure Container Apps": 0.70},
+      "billing_model_rationale": "Lower is more efficient for idle-gappy Agile workloads. Cloud Run scales to zero and bills per-request; Container Apps is consumption-based with scale-to-zero; Fargate bills provisioned vCPU continuously (1-min minimum), so it earns no idle discount.",
+      "billing_model_source_refs": ["sliplane_serverless_pricing_2025", "cloudexmachina_fargate_pricing_2025", "wimadev_serverless_pricing_2025"],
+      "arm_price_performance_multiplier": {"AWS Fargate": 0.62, "GCP Cloud Run": 1.00, "Azure Container Apps": 0.90},
+      "arm_rationale": "Cost multiplier reflecting documented ARM price-performance. AWS Graviton4 ~42% better price-performance vs comparable x86 (strongest, lowest multiplier); Azure Ampere Altra moderate; GCP Tau T2A baseline for this comparison.",
+      "arm_source_refs": ["byteiota_arm_x86_2025", "hykell_graviton_pricing_2026", "aws_graviton_official"],
+      "formula": "effective_cost = list_price * billing_model_efficiency * arm_price_performance; kappa = effective_cost / min(effective_cost)"
+    },
+    "platforms": [
+      {"platform": "AWS Fargate",          "kappa_relative": 1.00},
+      {"platform": "GCP Cloud Run",         "kappa_relative": 1.54},
+      {"platform": "Azure Container Apps",  "kappa_relative": 2.17}
+    ]
+  },
+
+  "pue": {
+    "_source": "Provider sustainability disclosures, 2024 (global-fleet and best-performing-site PUE).",
+    "platforms": [
+      {"platform": "Google Cloud",    "global_fleet_pue_2024": 1.09, "best_site_pue": 1.04},
+      {"platform": "AWS",             "global_fleet_pue_2024": 1.15, "best_site_pue": 1.04},
+      {"platform": "Microsoft Azure", "global_fleet_pue_2024": 1.16, "best_site_pue": 1.11}
+    ]
+  }
+}

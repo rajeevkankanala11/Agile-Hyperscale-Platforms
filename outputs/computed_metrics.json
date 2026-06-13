@@ -1,0 +1,51 @@
+{
+  "elasticity_velocity": [
+    {
+      "platform": "AWS Fargate",
+      "architecture": "Serverless CaaS",
+      "time_to_ready_s": 95,
+      "ev_instances_per_s": 1.05,
+      "burst_failure_rate_pct": 0.5
+    },
+    {
+      "platform": "Azure Container Apps",
+      "architecture": "Managed K8s",
+      "time_to_ready_s": 110,
+      "ev_instances_per_s": 0.91,
+      "burst_failure_rate_pct": 1.2
+    },
+    {
+      "platform": "GCP Cloud Run",
+      "architecture": "Knative",
+      "time_to_ready_s": 25,
+      "ev_instances_per_s": 4.0,
+      "burst_failure_rate_pct": 0.0
+    }
+  ],
+  "sei": [
+    {
+      "platform": "AWS Fargate",
+      "ev_norm": 0.263,
+      "rho": 0.995,
+      "c_norm": 1.0,
+      "sei": 0.261,
+      "sei_star": 0.4
+    },
+    {
+      "platform": "Azure Container Apps",
+      "ev_norm": 0.228,
+      "rho": 0.988,
+      "c_norm": 2.17,
+      "sei": 0.104,
+      "sei_star": 0.16
+    },
+    {
+      "platform": "GCP Cloud Run",
+      "ev_norm": 1.0,
+      "rho": 1.0,
+      "c_norm": 1.54,
+      "sei": 0.649,
+      "sei_star": 1.0
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+Provider,Network Tier,US-East<->EU-West RTT (ms),Packet Loss (%),Jitter (ms)
+AWS,Standard Public,74,0.04,1.2
+Azure,Microsoft Global,72,0.02,0.9
+GCP,Premium (Fiber),68,0.009,0.4
